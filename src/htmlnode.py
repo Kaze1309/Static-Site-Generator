@@ -1,4 +1,5 @@
 from textnode import TextNode, TextType
+import re
 class HTMLNode:
     def __init__(self,tag=None ,value=None, children=None, props=None) -> None:
         self.tag = tag
@@ -66,11 +67,9 @@ def text_node_to_html_node(text_node):
         case _:
             return Exception("Value not found")
 
-        
-
-
-
-
-
-
-            
+def extract_markdown_images(text):
+    matches = re.findall(r"!\[([^\[\]]*)\]\(([^\(\)]*)\)",text)
+    return matches
+def extract_markdown_links(text):
+    matches = re.findall(r"(?<!!)\[([^\[\]]*)\]\(([^\(\)]*)\)",text)
+    return matches
